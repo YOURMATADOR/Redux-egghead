@@ -1,44 +1,52 @@
 import React, { Component } from "react";
 
-import { connect } from "react-redux";
-let contador = 0;
+import { AgregarTodo } from "./Agregar";
+import { TodosVisibles } from "./Visibles";
+import { Footer } from "./Footer";
+
+const App = () => (
+  <div>
+    <h1> hola</h1>
+    <AgregarTodo />
+    <TodosVisibles />
+    <Footer />
+  </div>
+);
+
+export { App };
 
 //** ? crea un elemento en la lista gracias a un maping que otorga las propiedades por cada vez que itinera en un objeto */
-let Todo = ({ id, texto, completado, funcion }) => (
-  <li
-    key={id}
-    onClick={funcion}
-    style={{ textDecoration: completado ? "line-through" : "none" }}
-  >
-    {texto}
-  </li>
-);
+// let Todo = ({ id, texto, completado, funcion }) => (
+//   <li
+//     key={id}
+//     onClick={funcion}
+//     style={{ textDecoration: completado ? "line-through" : "none" }}
+//   >
+//     {texto}
+//   </li>
+// );
 
-let Todos = ({ elementosFiltrados, func }) => (
-  <ul>
-    {elementosFiltrados.map(i => (
-      <Todo key={i.id} {...i} funcion={() => func(i.id)} />
-    ))}
-  </ul>
-);
-const RetornaElementosFiltrados = state => {
-  return {
-    elementosFiltrados: filtrarTodos(state.Reducer, state.Filtrado)
-  };
-};
+// let Todos = ({ elementosFiltrados, func }) => (
+//   <ul>
+//     {elementosFiltrados.map(i => (
+//       <Todo key={i.id} {...i} funcion={() => func(i.id)} />
+//     ))}
+//   </ul>
+// );
+// const RetornaElementosFiltrados = state => ({
+//   elementosFiltrados: filtrarTodos(state.Reducer, state.Filtrado)
+// });
 
-const RetornaFuncionOnClick = dispatch => {
-  return {
-    func: id => {
-      dispatch({ type: "TOOGLE-TODO", id });
-    }
-  };
-};
+// const RetornaFuncionOnClick = dispatch => ({
+//   func: id => {
+//     dispatch(toogleTodo({ id }));
+//   }
+// });
 
-const TodosVisibles = connect(
-  RetornaElementosFiltrados,
-  RetornaFuncionOnClick
-)(Todos);
+// const TodosVisibles = connect(
+//   RetornaElementosFiltrados,
+//   RetornaFuncionOnClick
+// )(Todos);
 // class TodosVisibles extends Component {
 //   componentDidMount = () => {
 //     let { store } = this.props;
@@ -63,42 +71,42 @@ const TodosVisibles = connect(
 //     );
 //   }
 // }
-const Link = ({ activo, children, func }) => {
-  if (activo) {
-    return <span>{children}</span>;
-  }
-  return (
-    <a
-      href="#"
-      onClick={e => {
-        e.preventDefault();
-        func();
-      }}
-    >
-      {" "}
-      {children}
-    </a>
-  );
-};
+// const Link = ({ activo, children, func }) => {
+//   if (activo) {
+//     return <span>{children}</span>;
+//   }
+//   return (
+//     <a
+//       href="#"
+//       onClick={e => {
+//         e.preventDefault();
+//         func();
+//       }}
+//     >
+//       {" "}
+//       {children}
+//     </a>
+//   );
+// };
 
-const RetornarEstadoActualVsEstadoSolicitado = (state, misProps) => {
-  return {
-    activo: misProps.filtro === state.Filtrado
-  };
-};
+// const RetornarEstadoActualVsEstadoSolicitado = (state, misProps) => {
+//   return {
+//     activo: misProps.filtro === state.Filtrado
+//   };
+// };
 
-const RetornaFuncion = (dispatch, misProps) => {
-  return {
-    func: () => {
-      dispatch({ type: "SET-VISIBILITY-FILTER", filtro: misProps.filtro });
-    }
-  };
-};
+// const RetornaFuncion = (dispatch, misProps) => {
+//   return {
+//     func: () => {
+//       dispatch(cambiarFiltro({ filtro: misProps.filtro }));
+//     }
+//   };
+// };
 
-const Visibles = connect(
-  RetornarEstadoActualVsEstadoSolicitado,
-  RetornaFuncion
-)(Link);
+// const Visibles = connect(
+//   RetornarEstadoActualVsEstadoSolicitado,
+//   RetornaFuncion
+// )(Link);
 // class Visibles extends Component {
 //   componentDidMount = () => {
 //     const { store } = this.props;
@@ -127,62 +135,53 @@ const Visibles = connect(
 //   }
 // }
 
-const Footer = () => (
-  <h1>
-    Mostrar:
-    <Visibles filtro="SHOW-ALL">Todo</Visibles>
-    <Visibles filtro="SHOW-ACTIVE">Activos</Visibles>
-    <Visibles filtro="SHOW-INACTIVE">Inactivos</Visibles>
-  </h1>
-);
+// let AgregarTodo = ({ onClick }) => {
+//   let entrada;
 
-let AgregarTodo = ({ dispatch }) => {
-  let entrada;
+//   return (
+//     <div>
+//       <input
+//         type="text"
+//         ref={e => {
+//           entrada = e;
+//         }}
+//       />
+//       <button
+//         onClick={() => {
+//           onClick(entrada.value);
 
-  return (
-    <div>
-      <input
-        type="text"
-        ref={e => {
-          entrada = e;
-        }}
-      />
-      <button
-        onClick={() => {
-          dispatch({
-            type: "ADD-TODO",
-            texto: entrada.value,
-            id: contador++
-          });
-          entrada.value = "";
-        }}
-      >
-        imprimir estado
-      </button>
-    </div>
-  );
-};
-AgregarTodo = connect()(AgregarTodo);
-const filtrarTodos = (todos, filtro) => {
-  switch (filtro) {
-    case "SHOW-ALL":
-      return todos;
-      break;
-    case "SHOW-ACTIVE":
-      return todos.filter(e => e.completado);
-    case "SHOW-INACTIVE":
-      return todos.filter(e => !e.completado);
-    default:
-  }
-};
+//           // dispatch({
+//           //   type: "ADD-TODO",
+//           //   texto: entrada.value,
+//           //   id: contador++
+//           // });
+//           entrada.value = "";
+//         }}
+//       >
+//         imprimir estado
+//       </button>
+//     </div>
+//   );
+// };
+// const mapDispatchToProps = dispatch => ({
+//   onClick(texto) {
+//     dispatch(agregarTodo({ id: v4(), texto }));
+//   }
+// });
 
-const App = () => (
-  <div>
-    <h1> hola</h1>
-    <AgregarTodo />
-    <TodosVisibles />
-    <Footer />
-  </div>
-);
-
-export { App };
+// AgregarTodo = connect(
+//   undefined,
+//   mapDispatchToProps
+// )(AgregarTodo);
+// const filtrarTodos = (todos, filtro) => {
+//   switch (filtro) {
+//     case "SHOW-ALL":
+//       return todos;
+//       break;
+//     case "SHOW-ACTIVE":
+//       return todos.filter(e => e.completado);
+//     case "SHOW-INACTIVE":
+//       return todos.filter(e => !e.completado);
+//     default:
+//   }
+// };

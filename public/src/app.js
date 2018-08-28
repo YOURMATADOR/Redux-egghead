@@ -1,13 +1,11 @@
-import Store from "./reducer/store";
 import React from "react";
 import { render } from "react-dom";
-import { Provider } from "react-redux";
 
-import { App } from "./components/todos";
+import {configureStore} from './reducer/store';
+import Root from './components/app';
 
+const store =configureStore();
 render(
-  <Provider store={Store}>
-    <App />
-  </Provider>,
+  <Root store={store}/>,
   document.getElementById("app")
 );

@@ -1,4 +1,4 @@
-export const cambiarFiltro = ({ filtro = "SHOW-ALL" }) => ({
-  type: "SET-VISIVILITY-FILTER",
+export const cambiarFiltro = ({ filtro = "" }) => ({
+  type: "SET-VISIBILITY-FILTER",
   filtro
 });
