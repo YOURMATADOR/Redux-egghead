@@ -1,11 +1,10 @@
 export const filtrarTodos = (todos, filtro) => {
   switch (filtro) {
-    case "SHOW-ALL":
+    case "all":
       return todos;
-      break;
-    case "SHOW-ACTIVE":
+    case "active":
       return todos.filter(e => e.completado);
-    case "SHOW-INACTIVE":
+    case "inactive":
       return todos.filter(e => !e.completado);
     default:
   }

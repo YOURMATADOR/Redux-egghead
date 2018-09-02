@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import { AgregarTodo } from "./Agregar";
 import { TodosVisibles } from "./Visibles";
@@ -6,7 +6,7 @@ import { Footer } from "./Footer";
 // * agrega todos los componentes en un solo grupo para crear una app
 const App = () => (
   <div>
-    <h1> hola</h1>
+    <h1>hola</h1>
     <AgregarTodo />
     <TodosVisibles />
     <Footer />

@@ -20,6 +20,10 @@ let Agregar = ({ onClick }) => {
       <button
         onClick={() => {
           // ? ejecuta una funcion para poder agregar el valor de la entrada ya que si no de ejecuta una funcion no  es posible pasar el valor a la funcion onclick
+          if (entrada.value.length <= 0) {
+            entrada.placeholder = "INGRESA UN VALOR VALIDO";
+            return;
+          }
           onClick(entrada.value);
 
           // dispatch({

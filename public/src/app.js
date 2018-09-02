@@ -1,6 +1,5 @@
 import React from "react";
 import { render } from "react-dom";
-
 import {configureStore} from './reducer/store';
 import Root from './components/app';
 
