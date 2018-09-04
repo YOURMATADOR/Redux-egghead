@@ -1,11 +1,15 @@
-export const filtrarTodos = (todos, filtro) => {
+const obtenerReducer = reducer => reducer.ids.map(id => reducer.porId[id]);
+
+export const filtrarTodos = ({ Reducer }, filtro) => {
+  let reducers = obtenerReducer(Reducer);
   switch (filtro) {
     case "all":
-      return todos;
+      return reducers;
     case "active":
-      return todos.filter(e => e.completado);
+      return reducers.filter(e => e.completado);
     case "inactive":
-      return todos.filter(e => !e.completado);
+      return reducers.filter(e => !e.completado);
     default:
+    return Reducer;
   }
 };

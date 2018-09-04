@@ -1,5 +1,5 @@
 import React from "react";
-import { v4 } from "node-uuid";
+import uuidv4 from "uuid/v4";
 import { connect } from "react-redux";
 // ? al dar click en el boton agrega un nuevo TODO y ejecuta un distpatch para guardarlo en la store
 import { agregarTodo } from "../reducer/actions/todos";
@@ -42,7 +42,7 @@ let Agregar = ({ onClick }) => {
 const mapDispatchToProps = dispatch => ({
   //* pasa variables a el componente Agregar en este caso un objeto con el metodo onClick que guarda el valor de la entrada en la store cada vez que se presiona el boton
   onClick(texto) {
-    dispatch(agregarTodo({ id: v4(), texto }));
+    dispatch(agregarTodo({ id: uuidv4(), texto }));
   }
 });
 
